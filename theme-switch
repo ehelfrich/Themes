@@ -1,0 +1,51 @@
+#! /bin/bash
+cd ~/Themes
+
+new_theme=$1
+old_theme=$(<old_theme.txt)
+
+if [[ $# -eq 0 ]] ; then
+    echo 'please specify what color! ie. red or green'
+    exit 0
+fi
+
+if [[ $new_theme == $old_theme ]] ; then
+	echo "Theme already applied"
+	echo "reapplying theme"
+fi
+
+echo "Switiching Themes to :" && echo $new_theme
+
+#Check Current Theme color
+echo "Old theme is :" && echo $old_theme
+
+#######Replace Current theme with new theme###########
+cp ~/Themes/terminalrc.$new_theme ~/.config/xfce4/terminal/terminalrc
+cp ~/Themes/rings-v1.3.1.lua.$new_theme ~/.conky/rings-v1.3.1.lua
+cp ~/Themes/.conkyrc.$new_theme ~/.conkyrc
+
+#Update old_theme.txt
+echo $new_theme > ~/Themes/old_theme.txt
+
+#Restart Conky
+killall conky &
+echo "Restarting Conky"
+sleep 2
+( conky ) &
+
+
+#Load new Desktop Images
+echo "Loading new Wallpapers"
+sleep 2
+
+if [[ $new_theme == "red" ]];then
+	xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s ~/Themes/wallpaper/red1.jpg
+	xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace1/last-image -s ~/Themes/wallpaper/red2.jpg
+elif [[ $new_theme == "green" ]];then
+	xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s ~/Themes/wallpaper/green1.png
+	xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace1/last-image -s ~/Themes/wallpaper/green2.png
+else
+	echo "Error when determining color scheme for the wallpaper"
+fi
+
+echo "Restart terminal to load new theme"
