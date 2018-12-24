@@ -19,33 +19,90 @@ echo "Switiching Themes to :" && echo $new_theme
 #Check Current Theme color
 echo "Old theme is :" && echo $old_theme
 
-#######Replace Current theme with new theme###########
-cp ~/Themes/terminalrc.$new_theme ~/.config/xfce4/terminal/terminalrc
-cp ~/Themes/rings-v1.3.1.lua.$new_theme ~/.conky/rings-v1.3.1.lua
-cp ~/Themes/.conkyrc.$new_theme ~/.conkyrc
+if [[ $new_theme == 'red' ]]; then
+	# Move red files
+	cp ~/Themes/red/terminalrc ~/.config/xfce4/terminal/terminalrc
+	cp ~/Themes/red/rings-v1.3.1.lua ~/.conky/rings-v1.3.1.lua
+	cp ~/Themes/red/.conkyrc ~/.conkyrc
 
-#Update old_theme.txt
-echo $new_theme > ~/Themes/old_theme.txt
-
-#Restart Conky
-killall conky &
-echo "Restarting Conky"
-sleep 2
-( conky ) &
-
-
-#Load new Desktop Images
-echo "Loading new Wallpapers"
-sleep 2
-
-if [[ $new_theme == "red" ]];then
+	echo "Loading new Wallpapers"
 	xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s ~/Themes/wallpaper/red1.jpg
 	xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace1/last-image -s ~/Themes/wallpaper/red2.jpg
-elif [[ $new_theme == "green" ]];then
+
+	#Update old_theme.txt
+	echo $new_theme > ~/Themes/old_theme.txt
+
+	#Restart Conky
+	killall conky &
+	echo "Restarting Conky"
+	sleep 2
+	( conky ) &
+	echo "Restart terminal to load new theme"
+
+elif [[ $new_theme == 'green' ]]; then
+	# Move green files
+	cp ~/Themes/green/terminalrc ~/.config/xfce4/terminal/terminalrc
+	cp ~/Themes/green/rings-v1.3.1.lua ~/.conky/rings-v1.3.1.lua
+	cp ~/Themes/green/.conkyrc ~/.conkyrc
+
+	echo "Loading new Wallpapers"
 	xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s ~/Themes/wallpaper/green1.png
 	xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace1/last-image -s ~/Themes/wallpaper/green2.png
+
+	#Update old_theme.txt
+	echo $new_theme > ~/Themes/old_theme.txt
+
+	#Restart Conky
+	killall conky &
+	echo "Restarting Conky"
+	sleep 2
+	( conky ) &
+	echo "Restart terminal to load new theme"
+
+elif [[ $new_theme == 'blue-space' ]]; then
+	# Move blue-space files
+	cp ~/Themes/blue-space/terminalrc ~/.config/xfce4/terminal/terminalrc
+	cp ~/Themes/blue-space/rings-v1.3.1.lua ~/.conky/rings-v1.3.1.lua
+	cp ~/Themes/blue-space/.conkyrc ~/.conkyrc
+
+	echo "Loading new Wallpapers"
+	xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s ~/Themes/wallpaper/blue-space-wide1.jpg
+	xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace1/last-image -s ~/Themes/wallpaper/blue-space-wide2.jpg
+
+	#Update old_theme.txt
+	echo $new_theme > ~/Themes/old_theme.txt
+
+	#Restart Conky
+	killall conky &
+	echo "Restarting Conky"
+	sleep 2
+	( conky ) &
+	echo "Restart terminal to load new theme"
+
+elif [[ $new_theme == 'snow' ]]; then
+	# Move snow files
+	cp ~/Themes/snow/terminalrc ~/.config/xfce4/terminal/terminalrc
+	cp ~/Themes/snow/rings-v1.3.1.lua ~/.conky/rings-v1.3.1.lua
+	cp ~/Themes/snow/.conkyrc ~/.conkyrc
+
+	echo "Loading new Wallpapers"
+	xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s ~/Themes/wallpaper/snow1.jpg
+	xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace1/last-image -s ~/Themes/wallpaper/snow2.png
+
+	#Update old_theme.txt
+	echo $new_theme > ~/Themes/old_theme.txt
+
+	#Restart Conky
+	killall conky &
+	echo "Restarting Conky"
+	sleep 2
+	( conky ) &
+	echo "Restart terminal to load new theme"
+
 else
-	echo "Error when determining color scheme for the wallpaper"
+	echo "Error in determining new theme choice"
+	CALL="$(echo "$new_theme" is not a valid input parameter.)"
+	echo $CALL
 fi
 
-echo "Restart terminal to load new theme"
+

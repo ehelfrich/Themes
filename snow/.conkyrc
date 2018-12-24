@@ -51,7 +51,7 @@ conky.config = {
 	uppercase = false,
 
 	default_color = '#DCDCDC',
-	color0 = '#D64937',
+	color0 = '#82d5ff',
 	color1 = '#DCDCDC',
 
 -- Lua Load
@@ -83,6 +83,7 @@ ${font Play:normal:size=7}${color1}${goto 298}${voffset 5}Up${goto 370}${color1}
 ${font Play:normal:size=7}${goto 298}${color1}Down${goto 370}${color1}${totaldown wlp1s0} / ${color1}${downspeed wlp1s0}
 ${font Play:normal:size=7}${goto 300}${voffset 2}Local IP${goto 370}${addr wlp1s0}
 ${font Play:normal:size=7}${goto 300}${voffset 1}Public IP${goto 370}${execi 3600 wget -qO - ifconfig.co | sed -e 's/[^[:digit:]\|.]//g'}
+${font Play:normal:size=7}${goto 300}${voffset 2}VPN Tunnel${goto 370}${addr tun0}
 ${font Michroma:size=9}${alignc 120}${voffset -30} ${color0}${time %d %B %Y}
 ${font Michroma:size=18}${alignc 120}${color1}${voffset -5}${time %H}:${time %M}
 ${font Michroma:size=9}${color0}${goto 180}${voffset 30}Uptime${font Play:normal:size=8}${color1}${alignr 100}${uptime_short}
